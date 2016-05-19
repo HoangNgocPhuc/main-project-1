@@ -7,8 +7,24 @@
       <h1>
         <%= gravatar_for @user %>
         <%= @user.name %>
-        
       </h1>
     </section>
   </aside>
+  
+  <div class="col-md-8">
+    <% if @user.healths.any? %>
+      <div class= "ggwp2">
+        <%= link_to "Tính mới chỉ số BMI", root_path , class: "btn btn-lg btn-primary" %>
+      </div>
+      <h3>Kết quả BMI (<%= @user.healths.count %>)</h3>
+      <ol class="microposts">
+        <%= render @healths %>
+      </ol>
+      <%= will_paginate @healths %>
+    <%else%>
+      <ol class="microposts"></ol>
+      <ol class="microposts"><p style = "font-size: 150%">Bạn chưa có chỉ số BMI</p></ol>
+      <%= link_to "Tính ngay!", root_path , class: "btn btn-lg btn-primary" %>
+    <% end %>
+  </div>
 </div>

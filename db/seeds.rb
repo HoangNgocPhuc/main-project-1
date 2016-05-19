@@ -20,3 +20,12 @@ User.create!(name:  "Gin",
                password:              password,
                password_confirmation: password)
 end
+
+users = User.order(:created_at).take(6)
+36.times do
+  rd = Random.new  
+  weight = rd.rand(50..90).to_s
+  height = rd.rand(140..170).to_s
+  bmi = rd.rand(1.5..3.0)
+  users.each { |user| user.healths.create!(height: height, weight: weight, bmi: bmi) }
+end

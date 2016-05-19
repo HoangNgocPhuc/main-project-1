@@ -1,0 +1,28 @@
+<li id="micropost-<%= health.id %>">
+  <%= link_to gravatar_for(health.user, size: 50), health.user %>
+  <span class="user"><%= link_to health.user.name, health.user %></span>
+  <p class="content">Chiều cao:  <%= health.height %></p>
+  <p class="content">Cân nặng:   <%= health.weight %></p>
+  <p class="content">Chỉ số BMI: <%= health.bmi.round(2) %></p>
+    <div class="content">
+      <% @result = health.bmi %>
+      <% if @result < 18.5%>
+        <strong><%=" => Dưới chuẩn (ốm) - Bạn cần bổ sung thêm dinh dưỡng trong các bữa ăn!" %></strong>
+      <% elsif @result >= 18.5 && @result <= 25 %>
+        <strong><%="Chuẩn (bình thường) - Chúc mừng bạn, cơ thể bạn rất cân đối cố gắng phát huy nhé!" %></strong>
+      <% elsif @result >= 30 && @result <= 40 %>
+        <strong><%="Béo -Bạn nên chạy bộ thường xuyên nhé, tránh ăn đồ nhiều dầu mỡ" %></strong>
+      <% else %>
+        <strong><%="Rất béo – Bạn cần giảm cân ngay không sẽ rất nguy hiểm!" %></strong>
+      <% end %>
+    </div>
+  <span class="timestamp">
+    Đã tính <%= time_ago_in_words(health.created_at) %> trước.
+  </span>
+  <p class = "content">
+    <% if current_user?(health.user) %>
+        <%= link_to "delete", health, method: :delete,
+                                         data: { confirm: "You sure?" } %>
+    <% end %>
+  </p>  
+</li>

@@ -63,4 +63,13 @@ class UserTest < ActiveSupport::TestCase
     @user.password = @user.password_confirmation = "a" * 5
     assert_not @user.valid?
   end
+  
+  test "associated microposts should be destroyed" do
+    @user.save
+    @user.healths.create!(height: "170", weight: "60", bmi: 2.36)
+    assert_difference 'Health.count', -1 do
+      @user.destroy
+    end
+  end
+  
 end

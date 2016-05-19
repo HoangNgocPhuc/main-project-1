@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@health) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :height, "Chiều Cao (cm)" %>
+      <%= f.text_field :height, class: 'form-control' %>
+
+      <%= f.label :weight, "Cân nặng (kg)" %>
+      <%= f.text_field :weight, class: 'form-control' %>
+
+      <%= f.submit "Tính toán", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
